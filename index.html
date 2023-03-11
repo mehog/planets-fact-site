@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+    <title>Frontend Mentor | Planets fact site</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;500;600;700&family=League+Spartan:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/style.css?v=1.5">
+</head>
+
+<body>
+    <div id="root" style="display: none">
+        <header>
+            <div class="logo">
+                <a href="/" class="text-uppercase">The Planets</a>
+            </div>
+            <div class="navbar">
+                <nav class="nav-container">
+                    <div class="hamburger-lines fe-transform-y" id="hamburger-lines">
+                        <span class="line line1"></span>
+                        <span class="line line2"></span>
+                        <span class="line line3"></span>
+                    </div>
+                    <ul class="menu-items" id="menu-items">
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <section class="main">
+            <div class="main-inner">
+                <div class="planet-holder">
+                    <div class="planet-holder-inner">
+                        <img src="" alt="" id="planet-holder-img">
+                    </div>
+                </div>
+                <div class="planet-description" id="planet-description">
+                    <h2></h2>
+                    <p></p>
+                </div>
+                <div class="planet-quick-links">
+                    Quick links
+                </div>
+            </div>
+        </section>
+        <section class="footer">
+            <div class="tile">
+                <div class="tile-inner">
+                    <span>Rotation time</span>
+                    <span id="planet-rot-time"></span>
+                </div>
+            </div>
+            <div class="tile">
+                <div class="tile-inner">
+                    <span>Revolution time</span>
+                    <span id="planet-rev-time"></span>
+                </div>
+            </div>
+            <div class="tile">
+                <div class="tile-inner">
+                    <span>Radius</span>
+                    <span id="planet-radius"></span>
+                </div>
+            </div>
+            <div class="tile">
+                <div class="tile-inner">
+                    <span>Average temp.</span>
+                    <span id="planet-avg-temp"></span>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="/assets/js/script.js?v=1.1"></script>
+    <div id="loader">
+        <span class="loader"></span>
+    </div>
+</body>
+
+</html>
