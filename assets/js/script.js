@@ -61,6 +61,7 @@ _('planet-internal-structure').addEventListener('click', function() {
     _planetDescription.getElementsByTagName('p')[0].textContent = selectedPlanet.structure.content;
     _planetDescriptionsource.href = selectedPlanet.structure.source;
     _planetHolderImg.src = selectedPlanet.images.internal;
+    hideGeologyImg();
 });
 
 _('planet-surface-geology').addEventListener('click', function() {
@@ -68,7 +69,9 @@ _('planet-surface-geology').addEventListener('click', function() {
 
     _planetDescription.getElementsByTagName('p')[0].textContent = selectedPlanet.geology.content;
     _planetDescriptionsource.href = selectedPlanet.geology.source;
-    _planetHolderImg.src = selectedPlanet.images.geology;
+    _planetHolderImg.src = selectedPlanet.images.planet;
+    _('planet-holder-geology-img').src = selectedPlanet.images.geology;
+    showGeologyImg();
 });
 
 function showLoader() {
@@ -77,6 +80,14 @@ function showLoader() {
 
 function hideLoader() {
     _loader.style.display = "none";
+}
+
+function showGeologyImg() {
+    _('planet-holder-geology-img').style.display = "block";
+}
+
+function hideGeologyImg() {
+    _('planet-holder-geology-img').style.display = "none";
 }
 
 function setPlanetList(planets) {
@@ -134,6 +145,8 @@ function buildPlanetContentOverview(planetName) {
     _('planet-rev-time').textContent = selectedPlanet.revolution;
     _('planet-radius').textContent = selectedPlanet.radius;
     _('planet-avg-temp').textContent = selectedPlanet.temperature;
+
+    hideGeologyImg();
 
     setTimeout(() => {
         toggleActiveClass(_('planet-overiew'));

@@ -578,9 +578,15 @@ header .logo a {
     #planet-description {
         padding-right: 20px;
     }
+    #planet-description p {
+        opacity: .75;
+    }
     #planet-description,
     #planet-description h1 {
         text-align: left;
+    }
+    #planet-description span {
+        font-size: 14px;
     }
     .planet-quick-links-inner .btn {
         float: left;
@@ -696,9 +702,25 @@ header .logo a {
         float: left;
         width: calc(100% - 350px);
     }
+    .planet-holder-inner {
+        min-height: 670px;
+        position: relative;
+        height: auto;
+        max-height: 750px;
+    }
     .planet-holder-inner img {
-        margin: 200px auto 75px;
-        max-width: 600px;
+        margin: 0 auto;
+        max-width: 90%;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translateX(-50%) translateY(-50%);
+    }
+    .planet-holder-inner #planet-holder-geology-img {
+        bottom: 0;
+        transform: translateX(-50%);
+        max-width: 163px;
+        top: unset;
     }
     #planet-description {
         margin-top: 125px;
@@ -712,6 +734,12 @@ header .logo a {
     .main-inner .planet-quick-links {
         float: right;
     }
+    .planet-quick-links-inner .btn {
+        padding-left: 71px;
+    }
+    .planet-quick-links-inner .btn::before {
+        left: 28px;
+    }
     .nav-container,
     header .logo {
         text-align: left;
@@ -724,6 +752,9 @@ header .logo a {
     }
     .navbar {
         float: right;
+    }
+    .footer .tile {
+        padding: 20px 23px;
     }
     .footer .tile-inner span:first-of-type {
         font-size: 11px;
