@@ -368,7 +368,7 @@ header .logo a {
 .planet-holder-inner img {
     margin: 40px auto;
     display: block;
-    max-width: 80%;
+    max-width: 100%;
     width: auto;
 }
 
@@ -612,6 +612,7 @@ header .logo a {
         position: relative;
         padding: 0 24px 0 45px;
         text-align: left;
+        letter-spacing: 2px;
     }
     .planet-quick-links-inner .btn::before {
         content: "0" counter(tab);
