@@ -435,6 +435,12 @@ header .logo a {
         position: relative;
         display: inline-block;
         padding: 0 5px;
+        letter-spacing: 2px;
+        color: rgba(255, 255, 255, .5);
+    }
+    .planet-quick-links-inner .btn:hover span,
+    .planet-quick-links-inner .btn.active span {
+        color: var(--white);
     }
     .planet-quick-links-inner .btn.active span::after {
         content: "";
@@ -634,13 +640,49 @@ header .logo a {
 
     .navbar .menu-items li {
         position: relative;
+        float: left;
     }
 
     .navbar .menu-items li a {
         opacity: 0.75;
+        line-height: 85px;
     }
     .navbar .menu-items li a:hover {
         opacity: 1;
+    }
+    .navbar .menu-items li.active a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 2px;
+        width: 100%;
+        height: 4px;
+        background-color: transparent;
+        display: block;
+    }
+    .navbar .menu-items li.active.mercury a::after {
+        background-color: var(--mercury);
+    }
+    .navbar .menu-items li.active.venus a::after {
+        background-color: var(--venus);
+    }
+    .navbar .menu-items li.active.earth a::after {
+        background-color: var(--earth);
+    }
+    .navbar .menu-items li.active.mars a::after {
+        background-color: var(--mars);
+    }
+    .navbar .menu-items li.active.jupiter a::after {
+        background-color: var(--jupiter);
+    }
+    .navbar .menu-items li.active.saturn a::after {
+        background-color: var(--saturn);
+    }
+    .navbar .menu-items li.active.uranus a::after {
+        background-color: var(--uranus);
+    }
+    .navbar .menu-items li.active.neptune a::after {
+        background-color: var(--neptune);
     }
     h1 {
         font-size: 80px;
@@ -675,6 +717,9 @@ header .logo a {
         float: left;
         width: auto;
         margin: 0;
+    }
+    header .logo a {
+        font-size: 28px;
     }
     .navbar {
         float: right;

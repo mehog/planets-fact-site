@@ -18,19 +18,38 @@ function addListenerForBtnToggle() {
         if (event.target.tagName === 'SPAN') {
             clickedBtn = event.target.parentNode;
         }
-        if (clickedBtn) {
-            let selectedPlanet = getSelectedPlanet(getPlanetNameFromUrl());
-            let selectedPlanetName = selectedPlanet.name.toLowerCase();
-
-            clickedBtn.classList.add('active');
-            clickedBtn.dataset.activePlanet = selectedPlanetName;
-            const siblings = Array.from(clickedBtn.parentNode.children).filter((child) => child !== clickedBtn);
-            siblings.forEach((sibling) => sibling.classList.remove('active'));
-        }
+        toggleActiveClass(clickedBtn);
     });
 }
 
+async function getPlanetsData(filePath) {
+    let data = await fetch(filePath);
+    let planets = await data.json();
+    setNavMenu(planets);
+    setPlanetList(planets);
+    buildPlanetContentOverview(getPlanetNameFromUrl());
+    hideLoader();
+    preselectMenuItem();
+    _('root').style.display = "block";
+}
+
 addListenerForBtnToggle();
+
+setTimeout(() => { // show the loader for a moment
+    getPlanetsData('/assets/data.json');
+}, 300);
+
+function toggleActiveClass(clickedBtn) {
+    if (clickedBtn) {
+        let selectedPlanet = getSelectedPlanet(getPlanetNameFromUrl());
+        let selectedPlanetName = selectedPlanet.name.toLowerCase();
+
+        clickedBtn.classList.add('active');
+        clickedBtn.dataset.activePlanet = selectedPlanetName;
+        const siblings = Array.from(clickedBtn.parentNode.children).filter((child) => child !== clickedBtn);
+        siblings.forEach((sibling) => sibling.classList.remove('active'));
+    }
+}
 
 _('planet-overiew').addEventListener('click', function() {
     buildPlanetContentOverview(getPlanetNameFromUrl());
@@ -51,20 +70,6 @@ _('planet-surface-geology').addEventListener('click', function() {
     _planetDescriptionsource.href = selectedPlanet.geology.source;
     _planetHolderImg.src = selectedPlanet.images.geology;
 });
-
-async function getPlanetsData(filePath) {
-    let data = await fetch(filePath);
-    let planets = await data.json();
-    setNavMenu(planets);
-    setPlanetList(planets);
-    buildPlanetContentOverview(getPlanetNameFromUrl());
-    hideLoader();
-    _('root').style.display = "block";
-}
-
-setTimeout(() => { // show the loader for a moment
-    getPlanetsData('/assets/data.json');
-}, 300);
 
 function showLoader() {
     _loader.style.display = "block";
@@ -92,16 +97,20 @@ _("hamburger-lines").addEventListener("click", function () {
 
 function setNavMenu(data) {
     let ul = _('menu-items');
+
     for (let i = 0; i < data.length; i++) {
         const element = data[i];
         var liElement = document.createElement('li');
         var aElement = document.createElement('a');
+
+        liElement.classList.add(element.name.toLowerCase());
         aElement.href = "#" + element.name;
         aElement.textContent = element.name;
         aElement.classList.add(element.name.toLowerCase());
-        aElement.addEventListener("click", function () {
+        liElement.addEventListener("click", function () {
             _("hamburger-lines").classList.remove('active');
             buildPlanetContentOverview(element.name);
+            toggleActiveClass(this);
         });
         liElement.appendChild(aElement);
         ul.appendChild(liElement);
@@ -125,7 +134,11 @@ function buildPlanetContentOverview(planetName) {
     _('planet-rev-time').textContent = selectedPlanet.revolution;
     _('planet-radius').textContent = selectedPlanet.radius;
     _('planet-avg-temp').textContent = selectedPlanet.temperature;
-    console.log(selectedPlanet);
+
+    setTimeout(() => {
+        toggleActiveClass(_('planet-overiew'));
+    }, 100);
+
 }
 
 function getSelectedPlanet(planetName) {
@@ -135,4 +148,11 @@ function getSelectedPlanet(planetName) {
         selectedPlanet = planets.find(x => x.name === planets[0].name);
     }
     return selectedPlanet;
+}
+
+function preselectMenuItem() {
+    let planets = getPlanetList();
+    let selectedPlanet = getSelectedPlanet(getPlanetNameFromUrl()) || planets[0].name;
+    let menuItem = document.querySelector('.menu-items li.' + selectedPlanet.name.toLowerCase());
+    menuItem.classList.add('active');
 }
