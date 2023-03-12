@@ -9,12 +9,11 @@
     <title>Frontend Mentor | Planets fact site</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/spartan" rel="stylesheet">
     <link
         href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;500;600;700&family=League+Spartan:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/style.css?v=1.5">
+    <link rel="stylesheet" href="/assets/css/style.css?v=1.2">
 </head>
 
 <body>
@@ -35,23 +34,37 @@
                 </nav>
             </div>
         </header>
-        <section class="main">
+        <div class="main">
             <div class="main-inner">
                 <div class="planet-holder">
                     <div class="planet-holder-inner">
-                        <img src="" alt="" id="planet-holder-img">
+                        <img src="#" alt="" id="planet-holder-img">
                     </div>
                 </div>
                 <div class="planet-description" id="planet-description">
-                    <h2></h2>
+                    <h1>-</h1>
                     <p></p>
+                    <span>
+                        Source:
+                        <a href="#" id="planet-description-source" target="_blank">Wikipedia</a>
+                    </span>
                 </div>
                 <div class="planet-quick-links">
-                    Quick links
+                    <div class="btn-toggle-group planet-quick-links-inner">
+                        <button class="btn active" id="planet-overiew">
+                            <span>Overview</span>
+                        </button>
+                        <button class="btn" id="planet-internal-structure">
+                            <span><span class="mobile-hidden-inline">Internal</span> structure</span>
+                        </button>
+                        <button class="btn" id="planet-surface-geology">
+                            <span>Surface <span class="mobile-hidden-inline">geology</span></span>
+                        </button>
+                    </div>
                 </div>
             </div>
-        </section>
-        <section class="footer">
+        </div>
+        <div class="footer">
             <div class="tile">
                 <div class="tile-inner">
                     <span>Rotation time</span>
@@ -76,13 +89,13 @@
                     <span id="planet-avg-temp"></span>
                 </div>
             </div>
-        </section>
+        </div>
     </div>
 
-    <script src="/assets/js/script.js?v=1.1"></script>
     <div id="loader">
         <span class="loader"></span>
     </div>
+    <script src="/assets/js/script.js?v=1.5"></script>
 </body>
 
 </html>

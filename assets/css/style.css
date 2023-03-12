@@ -14,13 +14,14 @@
     --red: #d83a34;
     --border: 1px solid rgba(255, 255, 255, 0.2);
     --mercury: #def4fc;
-    --venus: #def4fc;
+    --venus: #eda249;
     --earth: #545bfe;
     --mars: #ff6a45;
     --jupiter: #ecad7a;
     --saturn: #fccb6b;
     --uranus: #65f0d5;
     --neptune: #497efa;
+    --btn-hover: #313148;
 }
 
 body {
@@ -41,39 +42,14 @@ ul li {
     list-style-type: none;
 }
 
-h1,
-h2 {
+h1 {
     font-family: "Antonio", sans-serif;
     font-weight: 500;
 }
 
-h3,
-h4 {
-    font-family: "League Spartan", sans-serif;
-    font-weight: 600;
-}
-
 h1 {
-    font-size: 80px;
-    line-height: 103px;
-}
-
-h2 {
     font-size: 40px;
     line-height: 52px;
-    letter-spacing: 1.5;
-}
-
-h3 {
-    font-size: 12px;
-    line-height: 25px;
-    letter-spacing: 2.6;
-}
-
-h3 {
-    font-size: 11px;
-    line-height: 25px;
-    letter-spacing: 1;
 }
 
 .text-uppercase {
@@ -81,14 +57,34 @@ h3 {
 }
 
 p {
-    font-family: "League Spartan", sans-serif;
-    font-size: 14px;
-    line-height: 25px;
+    font-family: "Spartan";
+    font-size: 11px;
+    line-height: 22px;
 }
 
 a {
     color: #fff;
     text-decoration: none;
+}
+
+.mobile-hidden-inline {
+    display: none !important;
+}
+
+.btn {
+    background-color: transparent;
+    height: 48px;
+    line-height: 48px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--white);
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-family: "Spartan";
+    padding: 0 24px;
+    letter-spacing: 1px;
+    font-weight: 700;
+    transition: 0.5s all;
 }
 
 .pull-left {
@@ -104,6 +100,7 @@ a {
     margin: 0 auto;
     width: calc(100% - 48px);
     padding: 0 24px;
+    display: grid;
 }
 
 .main-inner {
@@ -122,31 +119,34 @@ a {
 }
 
 .footer {
-	padding: 0 24px;
-	display: grid;
-	grid-template-columns: 1fr;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 1fr;
     grid-gap: 8px;
     max-width: 1440px;
     margin: 0 auto 24px;
 }
 
 .footer .tile {
-	height: 48px;
-	border: 1px solid rgba(255, 255, 255, .3);
-	padding: 0 24px;
+    height: 48px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 0 24px;
 }
 
 .footer .tile-inner span {
     display: block;
     line-height: 46px;
-	text-transform: uppercase;
-	font-size: 12px;
+    text-transform: uppercase;
+    font-size: 12px;
     float: left;
 }
 
 .footer .tile-inner span:first-of-type {
-	font-family: "League Spartan", sans-serif;
-    opacity: .5;
+    font-family: "Spartan";
+    opacity: 0.5;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 1px;
 }
 
 .footer .tile-inner span:last-of-type {
@@ -156,6 +156,22 @@ a {
 
 #planet-description {
     text-align: center;
+    margin-bottom: 27px;
+}
+
+#planet-description p {
+    margin-bottom: 32px;
+}
+#planet-description span {
+    font-family: Spartan;
+    font-size: 12px;
+}
+#planet-description span {
+    opacity: .5;
+}
+#planet-description span a {
+    font-weight: 700;
+    text-decoration: underline;
 }
 
 .fe-transform-xy {
@@ -241,12 +257,13 @@ header .logo a {
     height: 100vh;
     transition: transform 0.5s ease-in-out;
     text-align: center;
-    position: fixed;
+    position: absolute;
     left: 0;
     top: 69px;
     visibility: collapse;
     transform: translateX(-100%);
     background-color: var(--light-black);
+    z-index: 9999;
 }
 
 .navbar .menu-items li {
@@ -259,11 +276,12 @@ header .logo a {
     display: block;
     text-align: left;
     position: relative;
-    font-family: "League Spartan", sans-serif;
+    font-family: "Spartan";
     font-size: 15px;
     font-weight: 700;
     letter-spacing: 1.4px;
     line-height: 25px;
+    transition: 0.5s all;
 }
 
 .navbar .menu-items li a.mercury::before {
@@ -334,17 +352,17 @@ header .logo a {
 /* end nav */
 
 .planet-holder-inner img {
-	margin: 40px auto;
-	display: block;
-	max-width: 80%;
-	width: auto;
+    margin: 40px auto;
+    display: block;
+    max-width: 80%;
+    width: auto;
 }
 
-#planet-description h2 {
-	color: #fff;
-	text-transform: uppercase;
-	text-align: center;
-	margin: 0 auto 16px;
+#planet-description h1 {
+    color: #fff;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 0 auto 16px;
 }
 
 /* loader */
@@ -398,12 +416,88 @@ header .logo a {
 
 /* end loader */
 
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
+/* Mobile specific */
+@media only screen and (max-width: 767px) {
+    .planet-quick-links-inner {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 5px;
+        margin-left: -24px;
+        margin-right: -24px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .planet-quick-links-inner .btn {
+        font-size: 9px;
+        padding: 0;
+        border: none;
+    }
+    .planet-quick-links-inner span {
+        position: relative;
+        display: inline-block;
+        padding: 0 5px;
+    }
+    .planet-quick-links-inner .btn.active span::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        height: 4px;
+        width: 100%;
+        display: block;
+        left: 0;
+    }
+
+    .planet-quick-links-inner .btn.active[data-active-planet="mercury"] span::after {
+        background-color: var(--mercury);
+    }
+
+    .planet-quick-links-inner .btn.active[data-active-planet="venus"] span::after {
+        background-color: var(--venus);
+    }
+
+    .planet-quick-links-inner .btn.active[data-active-planet="earth"] span::after {
+        background-color: var(--earth);
+    }
+
+    .planet-quick-links-inner .btn.active[data-active-planet="mars"] span::after {
+        background-color: var(--mars);
+    }
+
+    .planet-quick-links-inner .btn.active[data-active-planet="jupiter"] span::after {
+        background-color: var(--jupiter);
+    }
+
+    .planet-quick-links-inner .btn.active[data-active-planet="saturn"] span::after {
+        background-color: var(--saturn);
+    }
+
+    .planet-quick-links-inner .btn.active[data-active-planet="uranus"] span::after {
+        background-color: var(--uranus);
+    }
+
+    .planet-quick-links-inner .btn.active[data-active-planet="neptune"] span::after {
+        background-color: var(--neptune);
+    }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
+    .mobile-hidden-inline {
+        display: inline !important;
+    }
+    h1 {
+        font-size: 48px;
+        line-height: 62px;
+    }
+    p {
+        font-size: 14px;
+        line-height: 25px;
+    }
+    .btn.active {
+        background-color: var(--light-blue);
+    }
+    .btn:hover {
+        background-color: var(--btn-hover);
+    }
     #hamburger-lines {
         display: none;
     }
@@ -441,10 +535,18 @@ header .logo a {
     .main-inner .planet-holder {
         grid-column: auto / span 6;
     }
+    .planet-quick-links {
+        display: grid;
+        align-items: end;
+    }
     .main-inner .planet-description,
     .main-inner .planet-quick-links {
         grid-column: auto / span 3;
         grid-row-start: 3;
+    }
+    .main-inner .planet-quick-links {
+        padding-left: 69px;
+        margin-bottom: 55px;
     }
     .footer {
         padding: 0 24px;
@@ -464,11 +566,125 @@ header .logo a {
     .footer .tile-inner span:last-of-type {
         float: left;
         margin-top: 15px;
+        font-size: 24px;
+    }
+    #planet-description {
+        padding-right: 20px;
+    }
+    #planet-description,
+    #planet-description h1 {
+        text-align: left;
+    }
+    .planet-quick-links-inner .btn {
+        float: left;
+        width: 100%;
+        margin-bottom: 16px;
+        position: relative;
+        padding: 0 24px 0 45px;
+        text-align: left;
+    }
+    .planet-quick-links-inner .btn::before {
+        content: "0" counter(tab);
+        counter-increment: tab;
+        position: absolute;
+        left: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #fff;
+        opacity: 0.5;
+    }
+
+    .planet-quick-links-inner .btn.active[data-active-planet="venus"] {
+        background-color: var(--venus);
+    }
+
+    .planet-quick-links-inner .btn.active[data-active-planet="earth"] {
+        background-color: var(--earth);
+    }
+
+    .planet-quick-links-inner .btn.active[data-active-planet="mars"] {
+        background-color: var(--mars);
+    }
+
+    .planet-quick-links-inner .btn.active[data-active-planet="jupiter"] {
+        background-color: var(--jupiter);
+    }
+
+    .planet-quick-links-inner .btn.active[data-active-planet="saturn"] {
+        background-color: var(--saturn);
+    }
+
+    .planet-quick-links-inner .btn.active[data-active-planet="uranus"] {
+        background-color: var(--uranus);
+    }
+
+    .planet-quick-links-inner .btn.active[data-active-planet="neptune"] {
+        background-color: var(--neptune);
     }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
+
+    header {
+        height: 85px;
+        padding: 0 24px;
+        line-height: 85px;
+    }
+
+    .navbar .menu-items li {
+        position: relative;
+    }
+
+    .navbar .menu-items li a {
+        opacity: 0.75;
+    }
+    .navbar .menu-items li a:hover {
+        opacity: 1;
+    }
+    h1 {
+        font-size: 80px;
+        line-height: 104px;
+    }
+    .main-inner {
+        display: block;
+    }
+    .planet-holder {
+        float: left;
+        width: 65%;
+    }
+    .planet-holder-inner img {
+        margin: 100px auto 75px;
+        max-width: 600px;
+    }
+    #planet-description {
+        margin-top: 125px;
+    }
+    #planet-description,
+    .main-inner .planet-quick-links {
+        float: left;
+        width: 35%;
+        padding: 0;
+    }
+    .main-inner .planet-quick-links {
+        float: right;
+    }
+    .nav-container,
+    header .logo {
+        text-align: left;
+        float: left;
+        width: auto;
+        margin: 0;
+    }
+    .navbar {
+        float: right;
+    }
+    .footer .tile-inner span:first-of-type {
+        font-size: 11px;
+    }
+    .footer .tile-inner span:last-of-type {
+        font-size: 40px;
+    }
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */

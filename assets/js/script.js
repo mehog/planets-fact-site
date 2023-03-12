@@ -2,22 +2,76 @@ function _(elId) {
     return document.getElementById(elId);
 }
 
+const _loader = _('loader');
+const _planetDescriptionsource = _('planet-description-source');
+const _planetDescription = _('planet-description');
+const _planetHolderImg = _('planet-holder-img');
+
+
+function addListenerForBtnToggle() {
+    const btnGroup = document.querySelector('.btn-toggle-group');
+    btnGroup.addEventListener('click', (event) => {
+        let clickedBtn;
+        if (event.target.classList.contains('btn')) {
+            clickedBtn = event.target;
+        }
+        if (event.target.tagName === 'SPAN') {
+            clickedBtn = event.target.parentNode;
+        }
+        if (clickedBtn) {
+            let selectedPlanet = getSelectedPlanet(getPlanetNameFromUrl());
+            let selectedPlanetName = selectedPlanet.name.toLowerCase();
+
+            clickedBtn.classList.add('active');
+            clickedBtn.dataset.activePlanet = selectedPlanetName;
+            const siblings = Array.from(clickedBtn.parentNode.children).filter((child) => child !== clickedBtn);
+            siblings.forEach((sibling) => sibling.classList.remove('active'));
+        }
+    });
+}
+
+addListenerForBtnToggle();
+
+_('planet-overiew').addEventListener('click', function() {
+    buildPlanetContentOverview(getPlanetNameFromUrl());
+});
+
+_('planet-internal-structure').addEventListener('click', function() {
+    let selectedPlanet = getSelectedPlanet(getPlanetNameFromUrl());
+
+    _planetDescription.getElementsByTagName('p')[0].textContent = selectedPlanet.structure.content;
+    _planetDescriptionsource.href = selectedPlanet.structure.source;
+    _planetHolderImg.src = selectedPlanet.images.internal;
+});
+
+_('planet-surface-geology').addEventListener('click', function() {
+    let selectedPlanet = getSelectedPlanet(getPlanetNameFromUrl());
+
+    _planetDescription.getElementsByTagName('p')[0].textContent = selectedPlanet.geology.content;
+    _planetDescriptionsource.href = selectedPlanet.geology.source;
+    _planetHolderImg.src = selectedPlanet.images.geology;
+});
+
 async function getPlanetsData(filePath) {
     let data = await fetch(filePath);
     let planets = await data.json();
-    _('root').style.display = "block";
     setNavMenu(planets);
     setPlanetList(planets);
-    buildPlanetContent(getPlanetNameFromUrl());
+    buildPlanetContentOverview(getPlanetNameFromUrl());
     hideLoader();
+    _('root').style.display = "block";
 }
 
+setTimeout(() => { // show the loader for a moment
+    getPlanetsData('/assets/data.json');
+}, 300);
+
 function showLoader() {
-    _('loader').style.display = "block";
+    _loader.style.display = "block";
 }
 
 function hideLoader() {
-    _('loader').style.display = "none";
+    _loader.style.display = "none";
 }
 
 function setPlanetList(planets) {
@@ -36,10 +90,6 @@ _("hamburger-lines").addEventListener("click", function () {
     this.classList.toggle('active');
 });
 
-setTimeout(() => { // show the loader for a moment
-    getPlanetsData('/assets/data.json');
-}, 300);
-
 function setNavMenu(data) {
     let ul = _('menu-items');
     for (let i = 0; i < data.length; i++) {
@@ -51,25 +101,38 @@ function setNavMenu(data) {
         aElement.classList.add(element.name.toLowerCase());
         aElement.addEventListener("click", function () {
             _("hamburger-lines").classList.remove('active');
-            buildPlanetContent(element.name);
+            buildPlanetContentOverview(element.name);
         });
         liElement.appendChild(aElement);
         ul.appendChild(liElement);
     }
 }
 
-function buildPlanetContent(planetName) {
-    let planets = getPlanetList();
-    let selectedPlanet = planets.find(x => x.name === planetName);
-    if (!selectedPlanet) {
-        selectedPlanet = planets.find(x => x.name === planets[0].name);
-    }
-    _('planet-holder-img').src = selectedPlanet.images.planet;
-    _('planet-description').getElementsByTagName('h2')[0].textContent = selectedPlanet.name;
-    _('planet-description').getElementsByTagName('p')[0].textContent = selectedPlanet.overview.content;
+function buildPlanetContentOverview(planetName) {
+    let selectedPlanet = getSelectedPlanet(planetName);
+    let selectedPlanetName = selectedPlanet.name;
+
+    _('planet-overiew').dataset.activePlanet = selectedPlanetName.toLowerCase();
+    _('planet-internal-structure').dataset.activePlanet = selectedPlanetName.toLowerCase();
+    _('planet-surface-geology').dataset.activePlanet = selectedPlanetName.toLowerCase();
+
+    _planetDescription.getElementsByTagName('h1')[0].textContent = selectedPlanetName;
+    _planetDescription.getElementsByTagName('p')[0].textContent = selectedPlanet.overview.content;
+    _planetDescriptionsource.href = selectedPlanet.overview.source;
+    _planetHolderImg.src = selectedPlanet.images.planet;
+
     _('planet-rot-time').textContent = selectedPlanet.rotation;
     _('planet-rev-time').textContent = selectedPlanet.revolution;
     _('planet-radius').textContent = selectedPlanet.radius;
     _('planet-avg-temp').textContent = selectedPlanet.temperature;
     console.log(selectedPlanet);
+}
+
+function getSelectedPlanet(planetName) {
+    let planets = getPlanetList();
+    let selectedPlanet = planets.find(x => x.name === planetName);
+    if (!selectedPlanet) {
+        selectedPlanet = planets.find(x => x.name === planets[0].name);
+    }
+    return selectedPlanet;
 }
